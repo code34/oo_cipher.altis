@@ -37,7 +37,8 @@
 			private _power = 0;
 
 			{
-				if (_x > 255) then {_decimal = 0;} else {_decimal = _x;};
+				//if (_x > 255) then {_decimal = 0;} else {_decimal = _x;};
+				_decimal = _x;
 				for "_i" from 7 to 0 step -1 do {
 					_power = 2^(_i);
 					_bool = (_power <= _decimal);
@@ -61,6 +62,7 @@
 					_power = 2^(_i);
 					if(_bool) then {_decimal = _decimal + _power; };
 				};
+				if(_decimal == 0) then { _decimal = 1;};
 				_array pushBack _decimal;
 			};
 			_array;
@@ -106,7 +108,9 @@
 			{
 				_cypherdata pushBack ((_x || _data select _forEachIndex) && !(_x && _data select _forEachIndex));
 			} forEach MEMBER("Utf8ToBin", _cypherstream);
-			toString (MEMBER("BinToUtf8", _cypherdata));
+			private _string = MEMBER("BinToUtf8", _cypherdata);
+			copyToClipboard format ["%1", _string];
+			toString (_string);
 		};
 
 		PUBLIC FUNCTION("","deconstructor") { 
