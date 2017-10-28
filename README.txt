@@ -21,7 +21,7 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>. 
 	*/
 
-	Create an cipher object
+	Create a cipher object
 	
 	Usage:
 		put the "oo_crypt.sqf" and the "oop.h" files in your mission directory
@@ -34,6 +34,6 @@
 	You can share, modify, distribute this script but don't remove the licence and the name of the original author
 
 	logs:
-		0.1 - OO CRYPT - first release with RC4 cipher
+		0.1 - OO CRYPT - first release with Rivest Cipher 4
 
 
