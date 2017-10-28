@@ -29,4 +29,5 @@
 	cipher or uncipher a string with RC4 algorithme
 	@key is the string of your private key 
 	@data is the string to cipher / uncipher
+	@return an array of decimal (you have to convert it with toString)
 	*/
