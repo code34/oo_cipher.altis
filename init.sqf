@@ -39,15 +39,17 @@
 			And lose the name of action.";
 
 	hint format ["original data: %1", _data];
-	sleep 4;
+	sleep 2;
 
 	_data = ["crypt",[_key, _data]] call _crypt;
-	hint format ["cipher data with RC4: %1", _data];
-	sleep 4;
+	_data = ["DecToHexa", _data] call _crypt;
+	copyToClipboard format ["cipher data with RC4: %1", _data];
+	sleep 2;
 	
+	_data = ["HexaToDec", _data] call _crypt;
 	_data = ["crypt",[_key, _data]] call _crypt;
-	hint format ["uncipher data: %1", _data];
-	sleep 4;
+	hint format ["uncipher data: %1", toString(_data)];
+	sleep 10;
 
 
 

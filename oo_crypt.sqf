@@ -25,7 +25,7 @@
 
 		};
 
-		PUBLIC FUNCTION("array","Utf8ToBin") {
+		PUBLIC FUNCTION("array","DecToBin") {
 			private _binary = [];
 			private _decimal = 0;
 			private _bool = false;
@@ -43,9 +43,9 @@
 			_binary;
 		};
 
-		PUBLIC FUNCTION("array","BinToUtf8") {
+		PUBLIC FUNCTION("array","BinToDec") {
 			private _decimal = 0;
-			private _strings = [];
+			private _decimals = [];
 			private _bool = false;
 			private _power = 0;
 
@@ -57,9 +57,37 @@
 					if(_bool) then {_decimal = _decimal + _power; };
 				};
 				if(_decimal isEqualTo 0) then { _decimal = 256;};
-				_strings pushBack _decimal;
+				_decimals pushBack _decimal;
 			};
+			_decimals;
+		};
+
+		PUBLIC FUNCTION("array","DecToHexa") {
+			private _hexa = "0123456789ABCDEF";
+			private _strings = "";
+
+			{
+				if(_x isEqualTo 256) then {_x = 0;};
+				{
+					_strings = _strings + (_hexa select [_x,1]);
+				}foreach [floor (_x / 16), (_x mod 16)];
+			} forEach _this;
 			_strings;
+		};
+
+		PUBLIC FUNCTION("string","HexaToDec") {
+			private _hexa = toArray "0123456789ABCDEF";
+			private _array = toArray _this;
+			private _decimals = [];
+			private _decimal = 0;
+
+			while { count _array > 0 } do {
+				_decimal = (_hexa find (_array select 0)) * 16 + (_hexa find (_array select 1));
+				if(_decimal isEqualTo 0) then {_decimal = 256;};
+				_decimals pushBack _decimal;
+				_array deleteRange [0,2];
+			};
+			_decimals;
 		};
 
 		PUBLIC FUNCTION("array","KeySchedule") {
@@ -81,12 +109,11 @@
 
 		PUBLIC FUNCTION("array","crypt") {
 			if!((_this select 0) isEqualType "") exitWith { hintC "OO_CRYPT::error: key must be a string"; "";};
-			if!((_this select 1) isEqualType "") exitWith {hintC "OO_CRYPT::error: data must be a string"; "";};
-
+			private _data = [];
+			if((_this select 1) isEqualType "") then { _data = toArray (_this select 1); } else { _data = _this select 1;};
 			private _i = 0;
 			private _j = 0;
 			private _key = MEMBER("KeySchedule", toArray (_this select 0));
-			private _data = toArray (_this select 1);
 			private _permute = 0;
 			private _cypherstream = [];
 			private _cypherdata = [];
@@ -101,11 +128,11 @@
 				true;
 			} count _data;
 
-			_data = MEMBER("Utf8ToBin", _data);	
+			_data = MEMBER("DecToBin", _data);	
 			{
 				_cypherdata pushBack ((_x || _data select _forEachIndex) && !(_x && _data select _forEachIndex));
-			} forEach MEMBER("Utf8ToBin", _cypherstream);
-			toString(MEMBER("BinToUtf8", _cypherdata));
+			} forEach MEMBER("DecToBin", _cypherstream);
+			MEMBER("BinToDec", _cypherdata);
 		};
 
 		PUBLIC FUNCTION("","deconstructor") { 
