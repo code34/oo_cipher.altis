@@ -116,12 +116,12 @@
 #define SAFE_VAR(var) (if (isNil {var}) then {nil} else {var})
 
 #define ENSURE_INDEX(idx,dft) if ((count _this) <= idx) then {_this set [idx,dft]}
-#define CHECK_THIS if (isNil "_this") then {_this = []} else {if (typeName(_this) != "ARRAY") then {_this = [_this]}}
+#define CHECK_THIS if (isNil "_this") then {_this = []} else {if !(_this isEqualType []) then {_this = [_this]}}
 
 #define CHECK_ACCESS(lvl) case ((_access >= lvl) &&
-#define CHECK_TYPE(typeStr) ((_argType == toUpper(typeStr)) || {toUpper(typeStr) == "ANY"})
-#define CHECK_NIL (_argType == "")
-#define CHECK_MEMBER(name) (_member == name)
+#define CHECK_TYPE(typeStr) ((_argType isEqualTo toUpper(typeStr)) || {toUpper(typeStr) isEqualTo "ANY"})
+#define CHECK_NIL (_argType isEqualTo "")
+#define CHECK_MEMBER(name) (_member isEqualTo name)
 #define CHECK_VAR(typeStr,varName) {CHECK_MEMBER(varName)} && {CHECK_TYPE(typeStr) || CHECK_NIL}
 
 #define GETVAR(var) (_classID + "_" + var)
