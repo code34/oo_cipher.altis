@@ -80,6 +80,9 @@
 		};
 
 		PUBLIC FUNCTION("array","crypt") {
+			if!((_this select 0) isEqualType "") exitWith { hintC "OO_CRYPT::error: key must be a string"; "";};
+			if!((_this select 1) isEqualType "") exitWith {hintC "OO_CRYPT::error: data must be a string"; "";};
+
 			private _i = 0;
 			private _j = 0;
 			private _key = MEMBER("KeySchedule", toArray (_this select 0));
