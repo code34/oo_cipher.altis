@@ -21,37 +21,31 @@
 	#include "oop.h"
 
 	CLASS("OO_CRYPT")
-		PRIVATE VARIABLE("scalar","index");
-		PRIVATE VARIABLE("array","list");
-		PRIVATE VARIABLE("code","condition");
-
-		PUBLIC FUNCTION("","constructor") {
+		PUBLIC FUNCTION("","constructor") {	
 
 		};
 
-
 		PUBLIC FUNCTION("array","Utf8ToBin") {
-			private _bin = [];
+			private _binary = [];
 			private _decimal = 0;
 			private _bool = false;
 			private _power = 0;
 
 			{
-				//if (_x > 255) then {_decimal = 0;} else {_decimal = _x;};
-				_decimal = _x;
+				if (_x > 255) then {_decimal = 0;} else {_decimal = _x;};
 				for "_i" from 7 to 0 step -1 do {
 					_power = 2^(_i);
 					_bool = (_power <= _decimal);
-					_bin pushBack _bool;
+					_binary pushBack _bool;
 					if (_bool) then {_decimal = _decimal - _power};
 				};
 			} count _this;
-			_bin;
+			_binary;
 		};
 
 		PUBLIC FUNCTION("array","BinToUtf8") {
 			private _decimal = 0;
-			private _array = [];
+			private _strings = [];
 			private _bool = false;
 			private _power = 0;
 
@@ -62,10 +56,10 @@
 					_power = 2^(_i);
 					if(_bool) then {_decimal = _decimal + _power; };
 				};
-				if(_decimal == 0) then { _decimal = 1;};
-				_array pushBack _decimal;
+				if(_decimal isEqualTo 0) then { _decimal = 256;};
+				_strings pushBack _decimal;
 			};
-			_array;
+			_strings;
 		};
 
 		PUBLIC FUNCTION("array","KeySchedule") {
@@ -108,14 +102,10 @@
 			{
 				_cypherdata pushBack ((_x || _data select _forEachIndex) && !(_x && _data select _forEachIndex));
 			} forEach MEMBER("Utf8ToBin", _cypherstream);
-			private _string = MEMBER("BinToUtf8", _cypherdata);
-			copyToClipboard format ["%1", _string];
-			toString (_string);
+			toString(MEMBER("BinToUtf8", _cypherdata));
 		};
 
 		PUBLIC FUNCTION("","deconstructor") { 
-			DELETE_VARIABLE("condition");
-			DELETE_VARIABLE("index");
-			DELETE_VARIABLE("list");
+
 		};
 	ENDCLASS;
