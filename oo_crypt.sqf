@@ -2,7 +2,7 @@
 	Author: code34 nicolas_boiteux@yahoo.fr
 	Copyright (C) 2017-2018 Nicolas BOITEUX
 
-	CLASS OO_CRYPT RC4
+	CLASS OO_CRYPT - Rivest Cipher 4
 	
 	This program is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
