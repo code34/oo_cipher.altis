@@ -34,6 +34,7 @@
 	You can share, modify, distribute this script but don't remove the licence and the name of the original author
 
 	logs:
+		0.3 - add 2048bits key - fix typo
 		0.2 - add hexa convertion functions
 		0.1 - OO CRYPT - first release with Rivest Cipher 4
 
