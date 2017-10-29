@@ -2,7 +2,7 @@
 	Author: code34 nicolas_boiteux@yahoo.fr
 	Copyright (C) 2017-2018 Nicolas BOITEUX
 
-	CLASS OO_CRYPT - Rivest Cipher 4
+	CLASS OO_CIPHER - Rivest Cipher 4
 	
 	This program is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
 
 	#include "oop.h"
 
-	CLASS("OO_CRYPT")
+	CLASS("OO_CIPHER")
 		PUBLIC FUNCTION("","constructor") {	
 
 		};
@@ -95,7 +95,7 @@
 			_decimals;
 		};
 
-		PUBLIC FUNCTION("array","KeySchedule") {
+		PRIVATE FUNCTION("array","KeySchedule") {
 			private _key = _this;
 			private _keylen = 256;
 			private _array = [];
@@ -115,9 +115,21 @@
 			};
 			_array;
 		};
+	
+		PUBLIC FUNCTION("array","cipher") {
+			if!((_this select 0) isEqualType "") exitWith { hintC "OO_CIPHER::error: key must be a string"; "";};
+			if!((_this select 1) isEqualType "") exitWith { hintC "OO_CIPHER::error: data must be a string"; "";};
+			MEMBER("DecToHexa", MEMBER("crypt", _this));
+		};
 
-		PUBLIC FUNCTION("array","crypt") {
-			if!((_this select 0) isEqualType "") exitWith { hintC "OO_CRYPT::error: key must be a string"; "";};
+		PUBLIC FUNCTION("array","uncipher") {
+			if!((_this select 0) isEqualType "") exitWith { hintC "OO_CIPHER::error: key must be a string"; "";};
+			if!((_this select 1) isEqualType "") exitWith { hintC "OO_CIPHER::error: data must be an hexa string"; "";};
+			private _array = [_this select 0, MEMBER("HexaToDec", _this select 1)];
+			toString(MEMBER("crypt",_array));
+		};
+
+		PUBLIC FUNCTION("array","crypt") {		
 			private _data = [];
 			if((_this select 1) isEqualType "") then { _data = toArray (_this select 1); } else { _data = _this select 1;};
 			private _i = 0;

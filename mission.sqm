@@ -14,7 +14,7 @@ class Mission
 	randomSeed=16186739;
 	class Intel
 	{
-		briefingName="OO CRYPT";
+		briefingName="OO CIPHER";
 		overviewText="by Code34";
 		startWeather=0.28999999;
 		startWind=0.099999994;

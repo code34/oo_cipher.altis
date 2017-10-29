@@ -1,8 +1,8 @@
-	call compilefinal preprocessFileLineNumbers "oo_crypt.sqf";
+	call compilefinal preprocessFileLineNumbers "oo_cipher.sqf";
 
 	sleep 1;
 
-	private _crypt = "new" call OO_CRYPT;
+	private _cipher = "new" call OO_CIPHER;
 	private _key = "WilliamShakespeare";
 	private _data = "To be, or not to be: that is the question: 
 			Whether 'tis nobler in the mind to suffer
@@ -41,14 +41,12 @@
 	hint format ["original data: %1", _data];
 	sleep 2;
 
-	_data = ["crypt",[_key, _data]] call _crypt;
-	_data = ["DecToHexa", _data] call _crypt;
+	_data = ["cipher",[_key, _data]] call _cipher;	
 	hint format ["Hexa Cipher data with RC4: %1", _data];
 	sleep 2;
 	
-	_data = ["HexaToDec", _data] call _crypt;
-	_data = ["crypt",[_key, _data]] call _crypt;
-	hint format ["uncipher data: %1", toString(_data)];
+	_data = ["uncipher",[_key, _data]] call _cipher;
+	hint format ["uncipher data: %1", _data];
 	sleep 10;
 
 

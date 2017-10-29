@@ -2,7 +2,7 @@
 	Author: code34 nicolas_boiteux@yahoo.fr
 	Copyright (C) 2017-2018 Nicolas BOITEUX
 
-	CLASS OO_CRYPT OBJECT
+	CLASS OO_CIPHER OBJECT
 
 	RC4 reference:
 	https://fr.wikipedia.org/wiki/RC4
@@ -24,9 +24,9 @@
 	Create a cipher object
 	
 	Usage:
-		put the "oo_crypt.sqf" and the "oop.h" files in your mission directory
+		put the "oo_cipher.sqf" and the "oop.h" files in your mission directory
 		put this code into your mission init.sqf
-		call compilefinal preprocessFileLineNumbers "oo_crypt.sqf";
+		call compilefinal preprocessFileLineNumbers "oo_cipher.sqf";
 
 	See example mission in directory: init.sqf
 	
@@ -36,6 +36,6 @@
 	logs:
 		0.3 - add 2048bits key - fix typo
 		0.2 - add hexa convertion functions
-		0.1 - OO CRYPT - first release with Rivest Cipher 4
+		0.1 - OO CIPHER - first release with Rivest Cipher 4
 
 

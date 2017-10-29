@@ -2,7 +2,7 @@
 	Author: code34 nicolas_boiteux@yahoo.fr
 	Copyright (C) 2017-2018 Nicolas BOITEUX
 
-	CLASS OO_CRYPT
+	CLASS OO_CIPHER
 	
 	This program is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -20,12 +20,12 @@
 
 	/*
 	Function: 
-	_crypt = "new" call OO_CRYPT;
-	Create a new crypt object
+	_cipher = "new" call OO_CIPHER;
+	Create a new cipher object
 	*/
 
 	/*
-	Function : ["crypt", ["key", "data"]] call _crypt;
+	Function : ["cipher", ["key", "data"]] call _cipher;
 	cipher or uncipher a string with RC4 algorithme
 	@key is the string of your private key 
 	@data is the string to cipher / uncipher
