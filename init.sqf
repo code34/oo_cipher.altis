@@ -47,8 +47,3 @@
 	
 	_data = ["uncipher",[_key, _data]] call _cipher;
 	hint format ["uncipher data: %1", _data];
-	sleep 10;
-
-
-
-
