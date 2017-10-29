@@ -97,10 +97,14 @@
 
 		PUBLIC FUNCTION("array","KeySchedule") {
 			private _key = _this;
-			private _keylen = count _key;
+			private _keylen = 256;
 			private _array = [];
 			private _j = 0;
 			private _permute = 0;
+			private _index1 = 0;
+			private _index2 = 0;
+
+			while { count _key < _keylen} do { _key pushBack 1; };
 
 			for "_i" from 0 to 255 step 1 do { _array set [_i, _i]; };
 			for "_i" from 0 to 255 step 1 do {

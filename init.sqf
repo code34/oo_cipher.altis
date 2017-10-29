@@ -43,7 +43,7 @@
 
 	_data = ["crypt",[_key, _data]] call _crypt;
 	_data = ["DecToHexa", _data] call _crypt;
-	copyToClipboard format ["cipher data with RC4: %1", _data];
+	hint format ["Hexa Cipher data with RC4: %1", _data];
 	sleep 2;
 	
 	_data = ["HexaToDec", _data] call _crypt;
