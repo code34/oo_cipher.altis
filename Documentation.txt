@@ -29,5 +29,13 @@
 	cipher or uncipher a string with RC4 algorithme
 	@key is the string of your private key 
 	@data is the string to cipher / uncipher
-	@return an array of decimal (you have to convert it with toString)
+	@return an ciphered hexadecimal string
+	*/
+
+	/*
+	Function : ["uncipher", ["key", "data"]] call _cipher;
+	cipher or uncipher a string with RC4 algorithme
+	@key is the string of your private key 
+	@data is a cephired hexadecimal string
+	@return a deciphered hexadecimal string 
 	*/
