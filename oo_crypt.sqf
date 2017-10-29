@@ -75,6 +75,11 @@
 			_strings;
 		};
 
+		PUBLIC FUNCTION("string","StrToHexa") {
+			MEMBER("DecToHexa", toArray (_this));
+		};
+
+
 		PUBLIC FUNCTION("string","HexaToDec") {
 			private _hexa = toArray "0123456789ABCDEF";
 			private _array = toArray _this;
@@ -92,7 +97,7 @@
 
 		PUBLIC FUNCTION("array","KeySchedule") {
 			private _key = _this;
-			private _len = count _key;
+			private _keylen = count _key;
 			private _array = [];
 			private _j = 0;
 			private _permute = 0;
@@ -100,7 +105,7 @@
 			for "_i" from 0 to 255 step 1 do { _array set [_i, _i]; };
 			for "_i" from 0 to 255 step 1 do {
 				_permute = (_array select _i);
-				_j = (_j + _permute + (_key select (_i mod _len))) mod 256;
+				_j = (_j + _permute + (_key select (_i mod _keylen))) mod 256;
 				_array set [_i, (_array select _j)];
 				_array set [_j, _permute];
 			};
@@ -115,24 +120,24 @@
 			private _j = 0;
 			private _key = MEMBER("KeySchedule", toArray (_this select 0));
 			private _permute = 0;
-			private _cypherstream = [];
-			private _cypherdata = [];
+			private _keystream = [];
+			private _cipherdata = [];
 
 			{
-				_i = (_i + 1) mod 256;
-				_j = (_j + (_key select _i)) mod 256;
+				_i = (_i + 1) mod 256; // 1
+				_j = (_j + (_key select _i)) mod 256; // 32
 				_permute = (_key select _i);
 				_key set [_i, (_key select _j)];
 				_key set [_j, _permute];
-				_cypherstream pushBack (((_key select _i) + (_key select _j)) mod 256);
+				_keystream pushBack (((_key select _i) + (_key select _j)) mod 256);
 				true;
 			} count _data;
 
 			_data = MEMBER("DecToBin", _data);	
 			{
-				_cypherdata pushBack ((_x || _data select _forEachIndex) && !(_x && _data select _forEachIndex));
-			} forEach MEMBER("DecToBin", _cypherstream);
-			MEMBER("BinToDec", _cypherdata);
+				_cipherdata pushBack ((_x || _data select _forEachIndex) && !(_x && _data select _forEachIndex));
+			} forEach MEMBER("DecToBin", _keystream);
+			MEMBER("BinToDec", _cipherdata);
 		};
 
 		PUBLIC FUNCTION("","deconstructor") { 
