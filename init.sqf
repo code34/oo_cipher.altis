@@ -1,4 +1,4 @@
-	call compilefinal preprocessFileLineNumbers "oo_cipher.sqf";
+	call compile preprocessFileLineNumbers "oo_cipher.sqf";
 
 	sleep 1;
 
