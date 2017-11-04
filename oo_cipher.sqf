@@ -22,10 +22,11 @@
 
 	CLASS("OO_CIPHER")
 		PUBLIC FUNCTION("","constructor") {	
-
+			DEBUG(#, "OO_CIPHER::constructor")
 		};
 
 		PUBLIC FUNCTION("array","DecToBin") {
+			DEBUG(#, "OO_CIPHER::DecToBin")
 			private _binary = [];
 			private _decimal = 0;
 			private _bool = false;
@@ -44,6 +45,7 @@
 		};
 
 		PUBLIC FUNCTION("array","BinToDec") {
+			DEBUG(#, "OO_CIPHER::BinToDec")
 			private _decimal = 0;
 			private _decimals = [];
 			private _bool = false;
@@ -63,6 +65,7 @@
 		};
 
 		PUBLIC FUNCTION("array","DecToHexa") {
+			DEBUG(#, "OO_CIPHER::DecToHexa")
 			private _hexa = "0123456789ABCDEF";
 			private _strings = "";
 
@@ -76,11 +79,13 @@
 		};
 
 		PUBLIC FUNCTION("string","StrToHexa") {
+			DEBUG(#, "OO_CIPHER::StrToHexa")
 			MEMBER("DecToHexa", toArray (_this));
 		};
 
 
 		PUBLIC FUNCTION("string","HexaToDec") {
+			DEBUG(#, "OO_CIPHER::HexaToDec")
 			private _hexa = toArray "0123456789ABCDEF";
 			private _array = toArray _this;
 			private _decimals = [];
@@ -96,6 +101,7 @@
 		};
 
 		PRIVATE FUNCTION("array","KeySchedule") {
+			DEBUG(#, "OO_CIPHER::KeySchedule")
 			private _key = _this;
 			private _keylen = 256;
 			private _array = [];
@@ -117,19 +123,22 @@
 		};
 	
 		PUBLIC FUNCTION("array","cipher") {
+			DEBUG(#, "OO_CIPHER::cipher")
 			if!((_this select 0) isEqualType "") exitWith { hintC "OO_CIPHER::error: key must be a string"; "";};
 			if!((_this select 1) isEqualType "") exitWith { hintC "OO_CIPHER::error: data must be a string"; "";};
 			MEMBER("DecToHexa", MEMBER("crypt", _this));
 		};
 
 		PUBLIC FUNCTION("array","uncipher") {
+			DEBUG(#, "OO_CIPHER::uncipher")
 			if!((_this select 0) isEqualType "") exitWith { hintC "OO_CIPHER::error: key must be a string"; "";};
 			if!((_this select 1) isEqualType "") exitWith { hintC "OO_CIPHER::error: data must be an hexa string"; "";};
 			private _array = [_this select 0, MEMBER("HexaToDec", _this select 1)];
 			toString(MEMBER("crypt",_array));
 		};
 
-		PUBLIC FUNCTION("array","crypt") {		
+		PUBLIC FUNCTION("array","crypt") {
+			DEBUG(#, "OO_CIPHER::crypt")		
 			private _data = [];
 			if((_this select 1) isEqualType "") then { _data = toArray (_this select 1); } else { _data = _this select 1;};
 			private _i = 0;
@@ -157,6 +166,6 @@
 		};
 
 		PUBLIC FUNCTION("","deconstructor") { 
-
+			DEBUG(#, "OO_CIPHER::deconstructor")	
 		};
 	ENDCLASS;
