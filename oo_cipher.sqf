@@ -66,7 +66,7 @@
 
 		PUBLIC FUNCTION("array","DecToHexa") {
 			DEBUG(#, "OO_CIPHER::DecToHexa")
-			private _hexa = "0123456789ABCDEF";
+			private _hexa = "0123456789abcdef";
 			private _strings = "";
 
 			{
@@ -86,7 +86,7 @@
 
 		PUBLIC FUNCTION("string","HexaToDec") {
 			DEBUG(#, "OO_CIPHER::HexaToDec")
-			private _hexa = toArray "0123456789ABCDEF";
+			private _hexa = toArray "0123456789abcdef";
 			private _array = toArray _this;
 			private _decimals = [];
 			private _decimal = 0;
@@ -115,7 +115,7 @@
 			for "_i" from 0 to 255 step 1 do { _array set [_i, _i]; };
 			for "_i" from 0 to 255 step 1 do {
 				_permute = (_array select _i);
-				_j = (_j + _permute + (_key select (_i mod _keylen))) mod 256;
+				_j = (_j + _permute + (_key select _i)) mod 256;
 				_array set [_i, (_array select _j)];
 				_array set [_j, _permute];
 			};
@@ -154,7 +154,7 @@
 				_permute = (_key select _i);
 				_key set [_i, (_key select _j)];
 				_key set [_j, _permute];
-				_keystream pushBack (((_key select _i) + (_key select _j)) mod 256);
+				_keystream pushBack (_key select (((_key select _i) + (_key select _j)) mod 256));
 				true;
 			} count _data;
 
