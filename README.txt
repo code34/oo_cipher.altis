@@ -34,6 +34,7 @@
 	You can share, modify, distribute this script but don't remove the licence and the name of the original author
 
 	logs:
+		0.5 - fix stream generation issue, mod, tune hexa to command line tools
 		0.4 - re factory, add uncipher method
 		0.3 - add 2048bits key - fix typo
 		0.2 - add hexa convertion functions
